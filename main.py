@@ -11,17 +11,15 @@ mean = 0
 stdev = 0
 global rule_triggered
 
-
 def generate_reference_values(dataset):
-    mean = round(sum(dataset) / len(dataset))
+    mean = round(sum(dataset)/len(dataset))
     stdev = round(np.std(dataset))
 
     print("--generate_reference_values--")
     print("mean: " + str(mean))
     print("stdev: " + str(stdev))
 
-
-# Check if any data point is < -3 STDEV
+#Check if any data point is < -3 STDEV
 def rule_1():
     # Getting length of list
     i = 0
@@ -29,13 +27,12 @@ def rule_1():
     # Iterating using while loop
     while i < len(datapoints) and not rule_triggered:
         if datapoints[i] < (mean + -3 * stdev):
-            print("Rule 1 triggered: " + str(datapoints[i]) + " falls below -3 stdev")
+            print(str(datapoints[i]) + " falls below -3 stdev")
             return True
         i += 1
     if not rule_triggered:
         print("Rule 1 not triggered")
         return False
-
 
 # Nine or more data points in a row below the mean
 def rule_2():
@@ -57,7 +54,6 @@ def rule_2():
         print("Rule 2 not triggered")
         return False
 
-
 # 6 points in a row are decreasing
 def rule_3():
     # Getting length of list
@@ -66,7 +62,7 @@ def rule_3():
 
     # Iterating using while loop
     while i < len(datapoints) and not rule_triggered:
-        if datapoints[i] < datapoints[i - 1] and count < 6:
+        if datapoints[i] < datapoints[i-1] and count < 6:
             count += 1
         else:
             count = 0
@@ -77,7 +73,6 @@ def rule_3():
     if not rule_triggered:
         print("Rule 3 not triggered")
         return False
-
 
 # 14 points in a row are alternating, increase then decrease
 def rule_4():
@@ -87,7 +82,7 @@ def rule_4():
 
     # Iterating using while loop
     while i < len(datapoints) and not rule_triggered:
-        if datapoints[i] < datapoints[i - 1] and count < 6:
+        if datapoints[i] < datapoints[i-1] and count < 6:
             count += 1
         else:
             count = 0
@@ -98,7 +93,6 @@ def rule_4():
     if not rule_triggered:
         print("Rule 3 not triggered")
         return False
-
 
 # 2/3 points in a row are < -2 stdev from mean
 def rule_5():
@@ -123,7 +117,6 @@ def rule_5():
         print("Rule 5 not triggered")
         return False
 
-
 # 4/5 points in a row are < -1 stdev from mean
 def rule_6():
     # Getting length of list
@@ -147,7 +140,6 @@ def rule_6():
         print("Rule 6 not triggered")
         return False
 
-
 # 15 points in a row are within 1 stdev from mean, + or -
 def rule_7():
     # Getting length of list
@@ -169,6 +161,7 @@ def rule_7():
         return False
 
 
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     mean = round(sum(datapoints) / len(datapoints))
@@ -179,18 +172,13 @@ if __name__ == '__main__':
     print("mean: " + str(mean))
     print("stdev: " + str(stdev))
 
-    # Check dataset against rules
-    while True:
-        if rule_1(): break
-        if rule_2(): break
-        if rule_3(): break
-        if rule_5(): break
-        if rule_6(): break
-        if rule_7(): break
-        print("passed all checks")
-        rule_triggered = False
-        break
 
-    print(rule_triggered)
+    rule_triggered = rule_1()
+    rule_triggered = rule_2()
+    rule_triggered = rule_3()
+    rule_triggered = rule_5()
+    rule_triggered = rule_6()
+    rule_triggered = rule_7()
+    #rule_triggered = rule_8()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
