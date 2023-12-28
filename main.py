@@ -2,7 +2,7 @@
 from __future__ import print_function
 import numpy as np
 
-datapoints = [1521, 1563, 1734, 1720, 1632, 1436, 1545, 1306, 1597, 1583, 1524, 1642, 1504, 1794, 1762, 1662,  2174, 1764, 1261, 1272, 1411,      1685,  1394,  1883, 1774, 1562, 1499, 1742, 1542, 1839]
+datapoints = [2,30,5,29,1,27,4,28,8,10,7,3,6,9,12,15,11,18,20,14,13,17,22,25,19,23,21,16,28,24,26]
 mean = 0
 stdev = 0
 
@@ -37,7 +37,7 @@ def rule_1():
 def rule_2():
     rule_triggered = False
     # Getting length of list
-    i = 0
+    i = 1
     count = 0
 
     # Iterating using while loop
@@ -85,17 +85,17 @@ def rule_4():
     count = 0
 
     # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
-        if datapoints[i] < datapoints[i - 1] and count < 6:
+    while i < len(datapoints) - 1 and not rule_triggered:
+        if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]):
             count += 1
         else:
             count = 0
-        if count == 6:
-            print("Rule 3 was triggered")
+        if count == 13:
+            print("Rule 4 triggered - 14 consecutive points are alternating, increasing then decreasing")
             return True
         i += 1
     if not rule_triggered:
-        print("Rule 3 not triggered")
+        print("Rule 4 not triggered")
         return False
 
 
@@ -170,6 +170,21 @@ def rule_7():
         print("Rule 7 not triggered")
         return False
 
+# 8 points in a row are above or below 1 standard deviation, alternating up and down
+def rule_8():
+    i = 1
+    count = 0
+
+    while i < len(datapoints) - 1:
+        if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]) and ((stdev + mean) < datapoints[i] or (-1 * stdev + mean) > datapoints[i]):
+            count += 1
+        else:
+            count = 0
+        if count == 7:
+            print("Rule 8 triggered - 8 points in a row are above or below 1 standard deviation, alternating up and down")
+            return True
+        i += 1
+    print("Rule 8 not triggered")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -184,8 +199,10 @@ if __name__ == '__main__':
     if rule_1(): rules_triggered.append("1")
     if rule_2(): rules_triggered.append("2")
     if rule_3(): rules_triggered.append("3")
+    if rule_4(): rules_triggered.append("4")
     if rule_5(): rules_triggered.append("5")
     if rule_6(): rules_triggered.append("6")
     if rule_7(): rules_triggered.append("7")
+    if rule_8(): rules_triggered.append("8")
 
     print(str(rules_triggered)[1:-1])
