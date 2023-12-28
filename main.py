@@ -18,30 +18,22 @@ def generate_reference_values(dataset):
 
 # Check if any data point is < -3 STDEV
 def rule_1():
-    rule_triggered = False
-    # Getting length of list
     i = 0
 
-    # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
+    while i < len(datapoints):
         if datapoints[i] < (mean + -3 * stdev):
             print("Rule 1 triggered - " + str(datapoints[i]) + " falls below -3 standard deviations from the mean")
             return True
         i += 1
-    if not rule_triggered:
-        print("Rule 1 not triggered")
-        return False
+    print("Rule 1 not triggered")
 
 
 # Nine or more data points in a row below the mean
 def rule_2():
-    rule_triggered = False
-    # Getting length of list
     i = 1
     count = 0
 
-    # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
+    while i < len(datapoints):
         if datapoints[i] < mean and count < 9:
             count += 1
         else:
@@ -50,20 +42,15 @@ def rule_2():
             print("Rule 2 triggered - 9 or more points in a row below the mean")
             return True
         i += 1
-    if not rule_triggered:
-        print("Rule 2 not triggered")
-        return False
+    print("Rule 2 not triggered")
 
 
 # 6 points in a row are decreasing
 def rule_3():
-    rule_triggered = False
-    # Getting length of list
     i = 1
     count = 0
 
-    # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
+    while i < len(datapoints):
         if datapoints[i] < datapoints[i - 1] and count < 6:
             count += 1
         else:
@@ -72,20 +59,16 @@ def rule_3():
             print("Rule 3 triggered - six points in a row are decreasing")
             return True
         i += 1
-    if not rule_triggered:
-        print("Rule 3 not triggered")
-        return False
+    print("Rule 3 not triggered")
 
 
 # 14 points in a row are alternating, increase then decrease
 def rule_4():
-    rule_triggered = False
-    # Getting length of list
     i = 1
     count = 0
 
     # Iterating using while loop
-    while i < len(datapoints) - 1 and not rule_triggered:
+    while i < len(datapoints) - 1:
         if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]):
             count += 1
         else:
@@ -94,20 +77,16 @@ def rule_4():
             print("Rule 4 triggered - 14 consecutive points are alternating, increasing then decreasing")
             return True
         i += 1
-    if not rule_triggered:
-        print("Rule 4 not triggered")
-        return False
+    print("Rule 4 not triggered")
 
 
 # 2/3 points in a row are < -2 stdev from mean
 def rule_5():
-    rule_triggered = False
-    # Getting length of list
     i = 2
     count = 0
 
     # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
+    while i < len(datapoints):
         j = i - 2
         while j <= i:
             if datapoints[j] < mean + -2 * stdev:
@@ -119,20 +98,15 @@ def rule_5():
         else:
             count = 0
         i += 1
-    if not rule_triggered:
-        print("Rule 5 not triggered")
-        return False
+    print("Rule 5 not triggered")
 
 
 # 4/5 points in a row are < -1 stdev from mean
 def rule_6():
-    rule_triggered = False
-    # Getting length of list
     i = 4
     count = 0
 
-    # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
+    while i < len(datapoints):
         j = i - 4
         while j <= i:
             if datapoints[j] < mean + -1 * stdev:
@@ -144,20 +118,15 @@ def rule_6():
         else:
             count = 0
         i += 1
-    if not rule_triggered:
-        print("Rule 6 not triggered")
-        return False
+    print("Rule 6 not triggered")
 
 
 # 15 points in a row are within 1 stdev from mean, + or -
 def rule_7():
-    rule_triggered = False
-    # Getting length of list
     i = 0
     count = 0
 
-    # Iterating using while loop
-    while i < len(datapoints) and not rule_triggered:
+    while i < len(datapoints):
         if (stdev + mean) > datapoints[i] > (-1 * stdev + mean) and count < 15:
             count += 1
         else:
@@ -166,9 +135,7 @@ def rule_7():
             print("Rule 7 triggered - 15 points in a row are within +/- 1 standard deviation from the mean")
             return True
         i += 1
-    if not rule_triggered:
-        print("Rule 7 not triggered")
-        return False
+    print("Rule 7 not triggered")
 
 # 8 points in a row are above or below 1 standard deviation, alternating up and down
 def rule_8():
