@@ -2,7 +2,9 @@
 from __future__ import print_function
 import numpy as np
 
-datapoints = [2,30,5,29,1,27,4,28,8,10,7,3,6,9,12,15,11,18,20,14,13,17,22,25,19,23,21,16,28,24,26]
+# Add your datapoints in the array below, ordered by most recent datapoints to oldest datapoints
+datapoints = []
+
 mean = 0
 stdev = 0
 
