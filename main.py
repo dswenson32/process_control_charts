@@ -5,23 +5,20 @@ import numpy as np
 
 # Check if any data point is < -3 STDEV
 def rule_1(datapoints, mean, stdev):
-    i = 0
+    recent_data = datapoints[0:1]
 
-    while i < len(datapoints):
-        if datapoints[i] < (mean + -3 * stdev):
-            print("Rule 1 triggered - " + str(datapoints[i]) + " falls below -3 standard deviations from the mean")
-            return True
-        i += 1
-    # print("Rule 1 not triggered")
-
+    if recent_data[0] < (mean + -3 * stdev):
+        print("Rule 1 triggered - " + str(datapoints[i]) + " falls below -3 standard deviations from the mean")
+        return True
 
 # Nine or more data points in a row below the mean
 def rule_2(datapoints, mean, stdev):
     i = 1
     count = 0
+    recent_data = datapoints[0:9]
 
-    while i < len(datapoints):
-        if datapoints[i] < mean and count < 9:
+    while i < len(recent_data):
+        if recent_data[i] < mean and count < 9:
             count += 1
         else:
             count = 0
@@ -36,9 +33,10 @@ def rule_2(datapoints, mean, stdev):
 def rule_3(datapoints, mean, stdev):
     i = 1
     count = 0
+    recent_data = datapoints[0:6]
 
-    while i < len(datapoints):
-        if datapoints[i] < datapoints[i - 1] and count < 6:
+    while i < len(recent_data):
+        if recent_data[i] < recent_data[i - 1] and count < 6:
             count += 1
         else:
             count = 0
@@ -53,10 +51,11 @@ def rule_3(datapoints, mean, stdev):
 def rule_4(datapoints, mean, stdev):
     i = 1
     count = 0
+    recent_data = datapoints[0:14]
 
     # Iterating using while loop
-    while i < len(datapoints) - 1:
-        if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]):
+    while i < len(recent_data) - 1:
+        if (recent_data[i - 1] < recent_data[i] > recent_data[i + 1]) or (recent_data[i - 1] > recent_data[i] < recent_data[i + 1]):
             count += 1
         else:
             count = 0
@@ -71,12 +70,13 @@ def rule_4(datapoints, mean, stdev):
 def rule_5(datapoints, mean, stdev):
     i = 2
     count = 0
+    recent_data = datapoints[0:3]
 
     # Iterating using while loop
-    while i < len(datapoints):
+    while i < len(recent_data):
         j = i - 2
         while j <= i:
-            if datapoints[j] < mean + -2 * stdev:
+            if recent_data[j] < mean + -2 * stdev:
                 count += 1
             j += 1
         if count >= 2:
@@ -92,11 +92,12 @@ def rule_5(datapoints, mean, stdev):
 def rule_6(datapoints, mean, stdev):
     i = 4
     count = 0
+    recent_data = datapoints[0:5]
 
-    while i < len(datapoints):
+    while i < len(recent_data):
         j = i - 4
         while j <= i:
-            if datapoints[j] < mean + -1 * stdev:
+            if recent_data[j] < mean + -1 * stdev:
                 count += 1
             j += 1
         if count >= 4:
@@ -112,9 +113,10 @@ def rule_6(datapoints, mean, stdev):
 def rule_7(datapoints, mean, stdev):
     i = 0
     count = 0
+    recent_data = datapoints[0:15]
 
-    while i < len(datapoints):
-        if (stdev + mean) > datapoints[i] > (-1 * stdev + mean) and count < 15:
+    while i < len(recent_data):
+        if (stdev + mean) > recent_data[i] > (-1 * stdev + mean) and count < 15:
             count += 1
         else:
             count = 0
@@ -128,9 +130,10 @@ def rule_7(datapoints, mean, stdev):
 def rule_8(datapoints, mean, stdev):
     i = 1
     count = 0
+    recent_data = datapoints[0:8]
 
-    while i < len(datapoints) - 1:
-        if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]) and ((stdev + mean) < datapoints[i] or (mean - stdev) > datapoints[i]):
+    while i < len(recent_data) - 1:
+        if (recent_data[i - 1] < recent_data[i] > recent_data[i + 1]) or (recent_data[i - 1] > recent_data[i] < recent_data[i + 1]) and ((stdev + mean) < recent_data[i] or (mean - stdev) > recent_data[i]):
             count += 1
         else:
             count = 0
