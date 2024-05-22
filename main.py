@@ -11,16 +11,12 @@ RULE_6_TEXT = "Rule 6 triggered - 4 of last 5 points are more than -1 standard d
 RULE_7_TEXT = "Rule 7 triggered - 15 points in a row are within +/- 1 standard deviation from the mean"
 RULE_8_TEXT = "Rule 8 triggered - 8 points in a row are above or below 1 standard deviation, alternating up and down"
 
-# Check if any data point is < -3 STDEV
+# Check if last datapoint is < -3 STDEV
 def rule_1(datapoints, mean, stdev):
-    i = 0
-
-    while i < len(datapoints):
-        if datapoints[i] < (mean + -3 * stdev):
-            print(RULE_1_TEXT)
-            return True
-        i += 1
-    return False
+    if datapoints[0] < (mean + -3 * stdev):
+        print(RULE_1_TEXT)
+        return True
+    return False  
 
 
 # Nine or more data points in a row below the mean
