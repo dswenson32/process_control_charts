@@ -82,7 +82,7 @@ def rule_6(datapoints, mean, stdev):
     threshold = mean - 1 * stdev
     count = sum(1 for point in datapoints[:5] if point < threshold)
     
-    if count >= 3:
+    if count >= 4:
         print(RULE_6_TEXT)
         return True
     return False
