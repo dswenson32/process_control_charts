@@ -39,7 +39,7 @@ def rule_3(datapoints, mean, stdev):
     count = 0
 
     for i in range(1, 7):
-        if datapoints[i] < datapoints[i - 1]:
+        if datapoints[i - 1] < datapoints[i]:
             count += 1
             if count == 6:
                 print(RULE_3_TEXT)
@@ -122,24 +122,24 @@ def rule_6(datapoints, mean, stdev):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # Add your datapoints in the array below, ordered by most recent datapoints to oldest datapoints
-    # datapoints = [145, 118, 118, 113, 136, 125, 136, 141, 155, 134, 137, 175, 182, 149, 136, 197, 155, 150, 157, 139, 139, 144, 147, 157, 200, 169, 155, 130, 172, 152]
+    datapoints = [0.776153, 0.957195, 0.959669, 0.947853, 0.947547, 0.971207, 0.967644, 0.962814, 0.951724, 0.949707, 0.964559, 0.965517, 0.973974, 0.962889, 0.958539, 0.700258, 0.966086, 0.947459, 0.948259, 0.948643, 0.976055, 0.970492, 0.966140, 0.976035, 0.961271, 0.930857, 0.965169, 0.965708, 0.980723, 0.970766]
 
-    # mean = round(sum(datapoints) / len(datapoints))
-    # stdev = round(np.std(datapoints))
+    mean = sum(datapoints) / len(datapoints)
+    stdev = np.std(datapoints)
 
-    # print("--generate_reference_values--")
-    # print("mean: " + str(mean))
-    # print("stdev: " + str(stdev))
-    # print(datapoints)
+    print("--generate_reference_values--")
+    print("mean: " + str(mean))
+    print("stdev: " + str(stdev))
+    print(datapoints)
 
     rules_triggered = []
-    #if rule_1([50,51,52,20,53,52,51], 50, 5): rules_triggered.append("1")
-    #if rule_2([1,2,3,4,5,6,7,8,9], 10, 1): rules_triggered.append("2")
-    #if rule_3([6,5,4,3,2,1,0], 0, 0): rules_triggered.append("3")
-    #if rule_4([6,5,6,5,6,5,6, 5,6,5,6,5,6,5,6,5], 0, 0): rules_triggered.append("4")
+    if rule_1(datapoints, mean, stdev): rules_triggered.append("1")
+    if rule_2(datapoints, mean, stdev): rules_triggered.append("2")
+    if rule_3(datapoints, mean, stdev): rules_triggered.append("3")
+    if rule_4(datapoints, mean, stdev): rules_triggered.append("4")
+    if rule_5(datapoints, mean, stdev): rules_triggered.append("5")
+    if rule_6(datapoints, mean, stdev): rules_triggered.append("6")
 
-    #if rule_5([3,15,6,1,1,1,1,1], 10, 2): rules_triggered.append("5")
-    #if rule_6([10,15,10,1,7,1,1,1], 10, 2): rules_triggered.append("6")
     #if rule_7([9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10], 10, 5): rules_triggered.append("7")
     # if rule_8(datapoints, mean, stdev): rules_triggered.append("8")
 
