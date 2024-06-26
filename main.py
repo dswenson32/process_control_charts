@@ -128,10 +128,12 @@ def rule_6(datapoints, mean, stdev):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # Add your datapoints in the array below, ordered by most recent datapoints to oldest datapoints
-    # datapoints = [0.776153, 0.957195, 0.959669, 0.947853, 0.947547, 0.971207, 0.967644, 0.962814, 0.951724, 0.949707, 0.964559, 0.965517, 0.973974, 0.962889, 0.958539, 0.700258, 0.966086, 0.947459, 0.948259, 0.948643, 0.976055, 0.970492, 0.966140, 0.976035, 0.961271, 0.930857, 0.965169, 0.965708, 0.980723, 0.970766]
+    #datapoints = [0.776153, 0.957195, 0.959669, 0.947853, 0.947547, 0.971207, 0.967644, 0.962814, 0.951724, 0.949707, 0.964559, 0.965517, 0.973974, 0.962889, 0.958539, 0.700258, 0.966086, 0.947459, 0.948259, 0.948643, 0.976055, 0.970492, 0.966140, 0.976035, 0.961271, 0.930857, 0.965169, 0.965708, 0.980723, 0.970766]
+    #datapoints = [9,9,9,9,50,9,9,9,22,9,9,9,100,9,9,11,11,11]
 
-    mean = sum(datapoints) / len(datapoints)
-    stdev = np.std(datapoints)
+    # If mean and stdev is < 1, then we are evaluating rates (%), not whole numbers, so do not round the values
+    mean = round(sum(datapoints) / len(datapoints)) if (sum(datapoints) / len(datapoints) > 1) else sum(datapoints) / len(datapoints)
+    stdev = round(np.std(datapoints)) if (np.std(datapoints) > 1) else np.std(datapoints)
     cov = round((stdev/mean) * 100)
 
     # print("--generate_reference_values--")
