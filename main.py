@@ -139,7 +139,8 @@ if __name__ == '__main__':
     # print("stdev: " + str(stdev))
     # print(datapoints)
 
-    rules_triggered = []if cov < 35:
+    rules_triggered = []
+    if cov < 35:
         if rule_1(datapoints, mean, stdev): rules_triggered.append(RULE_1_TEXT)
         if rule_2(datapoints, mean, stdev): rules_triggered.append(RULE_2_TEXT)
         if rule_3(datapoints, mean, stdev): rules_triggered.append(RULE_3_TEXT)
