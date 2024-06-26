@@ -20,15 +20,21 @@ def rule_1(datapoints, mean, stdev):
 
 
 # Nine or more data points in a row below the mean
+# UNLESS the rest of the dataset has 3 points >= 2*stdev (account for sales spikes)
 def rule_2(datapoints, mean, stdev):
     count = 0
+    two_plus_stdev_count = 0
 
     for point in datapoints[:9]:
         if point < mean:
             count += 1
             if count >= 9:
-                print(RULE_2_TEXT)
-                return True
+                for point2 in datapoints[9:]:
+                    if point2 >= (mean + stdev * 2):
+                        two_plus_stdev_count +=1
+                if two_plus_stdev_count < 3:
+                    print(RULE_2_TEXT)
+                    return True
         else:
             count = 0
     return False
@@ -122,15 +128,15 @@ def rule_6(datapoints, mean, stdev):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # Add your datapoints in the array below, ordered by most recent datapoints to oldest datapoints
-    datapoints = [0.776153, 0.957195, 0.959669, 0.947853, 0.947547, 0.971207, 0.967644, 0.962814, 0.951724, 0.949707, 0.964559, 0.965517, 0.973974, 0.962889, 0.958539, 0.700258, 0.966086, 0.947459, 0.948259, 0.948643, 0.976055, 0.970492, 0.966140, 0.976035, 0.961271, 0.930857, 0.965169, 0.965708, 0.980723, 0.970766]
+    # datapoints = [0.776153, 0.957195, 0.959669, 0.947853, 0.947547, 0.971207, 0.967644, 0.962814, 0.951724, 0.949707, 0.964559, 0.965517, 0.973974, 0.962889, 0.958539, 0.700258, 0.966086, 0.947459, 0.948259, 0.948643, 0.976055, 0.970492, 0.966140, 0.976035, 0.961271, 0.930857, 0.965169, 0.965708, 0.980723, 0.970766]
 
     mean = sum(datapoints) / len(datapoints)
     stdev = np.std(datapoints)
 
-    print("--generate_reference_values--")
-    print("mean: " + str(mean))
-    print("stdev: " + str(stdev))
-    print(datapoints)
+    # print("--generate_reference_values--")
+    # print("mean: " + str(mean))
+    # print("stdev: " + str(stdev))
+    # print(datapoints)
 
     rules_triggered = []
     if rule_1(datapoints, mean, stdev): rules_triggered.append("1")
@@ -140,7 +146,7 @@ if __name__ == '__main__':
     if rule_5(datapoints, mean, stdev): rules_triggered.append("5")
     if rule_6(datapoints, mean, stdev): rules_triggered.append("6")
 
-    #if rule_7([9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,10], 10, 5): rules_triggered.append("7")
+    # if rule_2([9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,11,11,11], 10, 5): rules_triggered.append("7")
     # if rule_8(datapoints, mean, stdev): rules_triggered.append("8")
 
     print(str(rules_triggered)[1:-1])
