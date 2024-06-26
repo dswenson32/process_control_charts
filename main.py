@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     # If mean and stdev is < 1, then we are evaluating rates (%), not whole numbers, so do not round the values
     mean = round(sum(datapoints) / len(datapoints)) if (sum(datapoints) / len(datapoints) > 1) else sum(datapoints) / len(datapoints)
-    stdev = round(np.std(datapoints)) if (np.std(datapoints) > 1) else np.std(datapoints)
+    stdev = round(np.std(datapoints)) if mean > 1 else np.std(datapoints)
     cov = round((stdev/mean) * 100)
 
     # print("--generate_reference_values--")
