@@ -132,19 +132,22 @@ if __name__ == '__main__':
 
     mean = sum(datapoints) / len(datapoints)
     stdev = np.std(datapoints)
+    cov = round((stdev/mean) * 100)
 
     # print("--generate_reference_values--")
     # print("mean: " + str(mean))
     # print("stdev: " + str(stdev))
     # print(datapoints)
 
-    rules_triggered = []
-    if rule_1(datapoints, mean, stdev): rules_triggered.append("1")
-    if rule_2(datapoints, mean, stdev): rules_triggered.append("2")
-    if rule_3(datapoints, mean, stdev): rules_triggered.append("3")
-    if rule_4(datapoints, mean, stdev): rules_triggered.append("4")
-    if rule_5(datapoints, mean, stdev): rules_triggered.append("5")
-    if rule_6(datapoints, mean, stdev): rules_triggered.append("6")
+    rules_triggered = []if cov < 35:
+        if rule_1(datapoints, mean, stdev): rules_triggered.append(RULE_1_TEXT)
+        if rule_2(datapoints, mean, stdev): rules_triggered.append(RULE_2_TEXT)
+        if rule_3(datapoints, mean, stdev): rules_triggered.append(RULE_3_TEXT)
+        if rule_4(datapoints, mean, stdev): rules_triggered.append(RULE_4_TEXT)
+        if rule_5(datapoints, mean, stdev): rules_triggered.append(RULE_5_TEXT)
+        if rule_6(datapoints, mean, stdev): rules_triggered.append(RULE_6_TEXT)
+    else :
+        print("Coeffiecent of Variance is too high for reasonable alerting: " + str(cov))
 
     # if rule_2([9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,11,11,11], 10, 5): rules_triggered.append("7")
     # if rule_8(datapoints, mean, stdev): rules_triggered.append("8")
