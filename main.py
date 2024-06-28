@@ -56,20 +56,20 @@ def rule_3(datapoints, mean, stdev):
 
 
 # 14 points in a row are alternating, increase then decrease
-def rule_4(datapoints, mean, stdev):
-    count = 0
+# def rule_4(datapoints, mean, stdev):
+#     count = 0
 
-    # Iterating using loop
-    for i in range(1, 15):
-        if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]):
-            count += 1
-            if count == 14:
-                print(RULE_4_TEXT)
-                return True
-        else:
-            count = 0
-    return False
-    # print("Rule 4 not triggered")
+#     # Iterating using loop
+#     for i in range(1, 15):
+#         if (datapoints[i - 1] < datapoints[i] > datapoints[i + 1]) or (datapoints[i - 1] > datapoints[i] < datapoints[i + 1]):
+#             count += 1
+#             if count == 14:
+#                 print(RULE_4_TEXT)
+#                 return True
+#         else:
+#             count = 0
+#     return False
+#     # print("Rule 4 not triggered")
 
 
 # 2/3 points in a row are < -2 stdev from mean
@@ -134,7 +134,8 @@ if __name__ == '__main__':
     # If mean is < 1, then we are evaluating rates (%), not whole numbers, so do not round the mean and stdev
     mean = round(sum(datapoints) / len(datapoints)) if (sum(datapoints) / len(datapoints) > 1) else sum(datapoints) / len(datapoints)
     stdev = round(np.std(datapoints)) if mean > 1 else np.std(datapoints)
-    cov = round((stdev/mean) * 100)
+    # Handling rates of 0% (ex. no confirmed loans have been authed), return COV of 100
+    cov = round((stdev/mean) * 100) if mean > 0 else 100
 
     # print("--generate_reference_values--")
     # print("mean: " + str(mean))
