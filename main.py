@@ -2,12 +2,12 @@
 from __future__ import print_function
 import numpy as np
 
-RULE_1_TEXT = "Rule 1 triggered - A datapoint falls below -3 standard deviations from the mean"
-RULE_2_TEXT = "Rule 2 triggered - 9 or more points in a row below the mean"
-RULE_3_TEXT = "Rule 3 triggered - six points in a row are decreasing"
+RULE_1_TEXT = "Extreme Outlier - A datapoint falls below -3 standard deviations below the mean"
+RULE_2_TEXT = "Performing Below Average - 9 or more points in a row below the mean"
+RULE_3_TEXT = "Downward Trend - six points in a row are decreasing"
 RULE_4_TEXT = "Rule 4 triggered - 14 consecutive points are alternating, increasing then decreasing"
-RULE_5_TEXT = "Rule 5 triggered - 2 of last 3 points are more than -2 standard deviations below the mean"
-RULE_6_TEXT = "Rule 6 triggered - 4 of last 5 points are more than -1 standard deviations below the mean"
+RULE_5_TEXT = "Recent Points Significant Outliers  - 2 of last 3 points are more than -2 standard deviations below the mean"
+RULE_6_TEXT = "Recent Points Notable Outliers - 4 of last 5 points are more than -1 standard deviations below the mean"
 RULE_7_TEXT = "Rule 7 triggered - 15 points in a row are within +/- 1 standard deviation from the mean"
 RULE_8_TEXT = "Rule 8 triggered - 8 points in a row are above or below 1 standard deviation, alternating up and down"
 
